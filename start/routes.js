@@ -20,6 +20,8 @@ Route.post('sessions', 'SessionController.store').validator('Session')
 Route.post('users', 'UserController.store').validator('User')
 
 Route.group(() => {
+  Route.get('roles', 'RoleController.index')
+
   Route.resource('teams', 'TeamController')
     .apiOnly()
     .validator(
@@ -59,4 +61,9 @@ Route.group(() => {
         ]
       )
     )
+
+  Route.get('members', 'MemberController.index')
+  Route.put('members/:id', 'MemberController.update').middleware('is:administrator')
+
+  Route.get('permissions', 'PermissionController.show')
 }).middleware(['auth', 'team'])
