@@ -18,6 +18,7 @@ class ProjectController {
    *
    */
   async store ({ request }) {
+    console.log('Aqui')
     const data = request.only(['title'])
     const project = request.team.projects().create(data)
 
